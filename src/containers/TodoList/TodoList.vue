@@ -23,7 +23,7 @@ export default {
   methods: {
     /**
      * @desc 添加undoitem
-     * @param {String val} input输入的value
+     * @param { String } val input输入的value
      */
     addUndoItem (val) {
       this.undoList.push(val)
