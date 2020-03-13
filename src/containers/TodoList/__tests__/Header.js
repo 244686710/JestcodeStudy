@@ -2,25 +2,25 @@ import { shallowMount } from '@vue/test-utils'
 import Header from '../components/Header.vue'
 import { findTestWrapper } from '../../../utils/testUtils'
 
-describe('Header.vue', () => {
-  it('Header 样式发生改变时 做出提示', () => {
+describe('Header组件', () => {
+  it('样式发生改变时 做出提示', () => {
     const wrapper = shallowMount(Header)
     expect(wrapper).toMatchSnapshot()
   })
 
-  it('Header 组件包含input', () => {
+  it('包含input', () => {
     const wrapper = shallowMount(Header)
     const input = findTestWrapper(wrapper, 'input')
     expect(input.exists()).toBe(true)
   })
 
-  it('Header 中 input 框初始内容为空', () => {
+  it('input 框初始内容为空', () => {
     const wrapper = shallowMount(Header)
     const inputValue = wrapper.vm.$data.inputValue
     expect(inputValue).toBe('')
   })
 
-  it('Header 中input值发生变化时，数据应该跟着变', () => {
+  it('input值发生变化时，数据应该跟着变', () => {
     const wrapper = shallowMount(Header)
     const input = findTestWrapper(wrapper, 'input')
     const testValue = 'test value'
@@ -29,7 +29,7 @@ describe('Header.vue', () => {
     expect(inputValue).toEqual(testValue)
   })
 
-  it('Header 中input无内容是回车，无反应', () => {
+  it('input无内容是回车，无反应', () => {
     const wrapper = shallowMount(Header)
     const input = findTestWrapper(wrapper, 'input')
     input.setValue('')
@@ -37,7 +37,7 @@ describe('Header.vue', () => {
     expect(wrapper.emitted().add).toBeFalsy()
   })
 
-  it('Header 中input 有内容是，向外触发时间，后内容清空', () => {
+  it('input 回车有内容时，触发事件，后内容清空', () => {
     const wrapper = shallowMount(Header)
     const input = findTestWrapper(wrapper, 'input')
     input.setValue('test value')

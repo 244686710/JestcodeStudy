@@ -2,18 +2,23 @@
   <div>
     <Header @add="addUndoItem" />
     <div>
-      <ul>
-        <li v-for="(item, index) in undoList" :key="index">{{item}}</li>
-      </ul>
+      <UndoList
+        :list="undoList"
+        @delete="handleItemDelete"
+        @status="handleStatusChange"
+        @reset="handleResetStatus"
+      />
     </div>
   </div>
 </template>
 <script>
 import Header from './components/Header.vue'
+import UndoList from './components/UndoList.vue'
 export default {
   name: 'TodoList',
   components: {
-    Header
+    Header,
+    UndoList
   },
   data () {
     return {
@@ -26,7 +31,49 @@ export default {
      * @param { String } val input输入的value
      */
     addUndoItem (val) {
-      this.undoList.push(val)
+      this.undoList.push({
+        value: val,
+        status: 'div'
+      })
+    },
+    /**
+     * @desc 删除item
+     * @param { Number } index 索引
+     */
+    handleItemDelete (index) {
+      this.undoList.splice(index, 1)
+    },
+
+    /**
+     * @description 变更item
+     * @param { Number } index 索引
+     */
+    handleStatusChange (index) {
+      const newList = []
+      this.undoList.forEach((item, itemIndex) => {
+        if (itemIndex === index) {
+          newList.push({
+            status: 'input', value: item.value
+          })
+        } else {
+          newList.push({
+            status: 'div', value: item.value
+          })
+        }
+      })
+      this.undoList = newList
+    },
+    /**
+     * @description 保存编辑
+     */
+    handleResetStatus (index) {
+      const newList = []
+      this.undoList.forEach((item, itemIndex) => {
+        newList.push({
+          status: 'div', value: item.value
+        })
+      })
+      this.undoList = newList
     }
   }
 }

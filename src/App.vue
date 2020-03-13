@@ -14,6 +14,9 @@ export default {
 </script>
 
 <style lang="stylus">
+body {
+  background #cdcdcd
+}
 * {
   margin 0
   padding 0
