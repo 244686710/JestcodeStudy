@@ -2,8 +2,8 @@
   <div class="header">
     <div class="header-content">
       TodoList
-      <input class="header-input" type="text" data-test="input" v-model="inputValue"
-        @keyup.enter="addTodoItem"
+      <input class="header-input" type="text" data-test="header-input" v-model="inputValue"
+        @keyup.enter="() => addTodoItem()"
         placeholder="Add UndoItem"
       >
     </div>

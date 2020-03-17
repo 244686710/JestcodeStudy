@@ -6,10 +6,10 @@
     </div>
     <ul class="list">
       <li
+        data-test="list-item"
         class="item"
         v-for="(item, index) in list" :key="index"
-        data-test="item"
-        @click="changeStatus(index)"
+        @click="() => changeStatus(index)"
       >
         <input type="text"
           v-if="item.status === 'input'"
@@ -27,13 +27,12 @@
 <script>
 export default {
   name: 'UndoList',
-  props: {
-    list: {
-
-    }
-  },
+  props: ['list'],
   data () {
     return {
+      listtest: [
+        { status: 'div', value: 1211121 }
+      ]
     }
   },
   methods: {
