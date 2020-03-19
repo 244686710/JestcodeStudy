@@ -6,7 +6,7 @@
     </div>
     <ul class="list">
       <li
-        data-test="list-item"
+
         class="item"
         v-for="(item, index) in list" :key="index"
         @click="() => changeStatus(index)"
@@ -18,7 +18,7 @@
           class="input"
           @blur="handleInputBlur"
         />
-        <span v-else>{{item.value}}</span>
+        <span v-else data-test="list-item">{{item.value}}</span>
         <span class="delete" data-test="delete-button" @click="deleteItem(index)">-</span>
       </li>
     </ul>
