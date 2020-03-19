@@ -12,13 +12,14 @@
   </div>
 </template>
 <script>
-import Header from './components/Header.vue'
-import UndoList from './components/UndoList.vue'
+import Header from '../../components/Header.vue'
+import UndoList from '../../components/UndoList.vue'
 import axios from 'axios'
 export default {
   name: 'TodoList',
   components: {
     Header,
+
     UndoList
   },
   data () {
@@ -26,6 +27,7 @@ export default {
       undoList: []
     }
   },
+
   mounted () {
     /*
       {
@@ -38,14 +40,14 @@ export default {
         ]
       }
     */
-    setTimeout(() => {
-      axios.get('/getUndolist.json').then((res) => {
+    axios
+      .get('/getUndolist.json')
+      .then(res => {
         this.undoList = res.data
-        console.log(this.undoList)
-      }).catch(e => {
-        console.log(e)
       })
-    }, 5000)
+      .catch(e => {
+        // console.log(e)
+      })
   },
 
   methods: {
@@ -76,11 +78,13 @@ export default {
       this.undoList.forEach((item, itemIndex) => {
         if (itemIndex === index) {
           newList.push({
-            status: 'input', value: item.value
+            status: 'input',
+            value: item.value
           })
         } else {
           newList.push({
-            status: 'div', value: item.value
+            status: 'div',
+            value: item.value
           })
         }
       })
@@ -93,7 +97,8 @@ export default {
       const newList = []
       this.undoList.forEach((item, itemIndex) => {
         newList.push({
-          status: 'div', value: item.value
+          status: 'div',
+          value: item.value
         })
       })
       this.undoList = newList
